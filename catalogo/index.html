@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html class="dark" lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Catálogo | Vecar Autos</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Hanken+Grotesk:wght@400;500;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="styles/main.css" rel="stylesheet"/>
+<script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-secondary-container": "#b5b5b5",
+              "inverse-surface": "#e5e2e1",
+              "outline-variant": "#424656",
+              "on-surface": "#e5e2e1",
+              "inverse-primary": "#0054d6",
+              "surface-container-low": "#1c1b1b",
+              "error": "#ffb4ab",
+              "on-surface-variant": "#c2c6d8",
+              "primary-fixed-dim": "#b3c5ff",
+              "surface-container-highest": "#353534",
+              "surface-container": "#201f1f",
+              "on-error-container": "#ffdad6",
+              "tertiary-container": "#727171",
+              "surface-container-lowest": "#0e0e0e",
+              "on-primary-fixed": "#001849",
+              "primary-fixed": "#dae1ff",
+              "secondary-fixed-dim": "#c6c6c6",
+              "on-primary-container": "#f8f7ff",
+              "surface-variant": "#353534",
+              "on-secondary-fixed-variant": "#454747",
+              "primary-container": "#0066ff",
+              "secondary": "#c6c6c6",
+              "charcoal-deep": "#121212",
+              "tertiary-fixed": "#e5e2e1",
+              "on-secondary": "#2f3131",
+              "primary": "#b3c5ff",
+              "on-tertiary-fixed-variant": "#474746",
+              "status-gold": "#D4AF37",
+              "surface-tint": "#b3c5ff",
+              "secondary-container": "#454747",
+              "surface": "#131313",
+              "surface-container-high": "#2a2a2a",
+              "on-tertiary": "#313030",
+              "error-container": "#93000a",
+              "on-primary": "#002b75",
+              "surface-bright": "#3a3939",
+              "on-secondary-fixed": "#1a1c1c",
+              "tertiary": "#c8c6c5",
+              "titanium-silver": "#B0B0B0",
+              "on-primary-fixed-variant": "#003fa4",
+              "surface-dim": "#131313",
+              "on-tertiary-fixed": "#1c1b1b",
+              "electric-blue": "#0066FF",
+              "background": "#131313",
+              "inverse-on-surface": "#313030",
+              "on-error": "#690005",
+              "outline": "#8c90a1",
+              "on-background": "#e5e2e1",
+              "tertiary-fixed-dim": "#c8c6c5",
+              "on-tertiary-container": "#faf7f6",
+              "secondary-fixed": "#e2e2e2"
+            },
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              full: "9999px"
+            },
+            spacing: {
+              "section-padding": "80px",
+              base: "8px",
+              "card-gap": "24px",
+              "container-max": "1440px",
+              gutter: "24px"
+            },
+            fontFamily: {
+              "headline-lg": ["Sora"],
+              "label-caps": ["Hanken Grotesk"],
+              "headline-lg-mobile": ["Sora"],
+              "headline-xl": ["Sora"],
+              "body-md": ["Hanken Grotesk"],
+              "price-display": ["Sora"],
+              "body-sm": ["Hanken Grotesk"]
+            },
+            fontSize: {
+              "headline-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+              "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "700"}],
+              "headline-lg-mobile": ["24px", {"lineHeight": "1.2", "fontWeight": "600"}],
+              "headline-xl": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+              "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+              "price-display": ["24px", {"lineHeight": "1", "letterSpacing": "0", "fontWeight": "700"}],
+              "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}]
+            }
+          }
+        }
+      }
+    </script>
+</head>
+<body class="font-body-md text-on-surface selection:bg-electric-blue selection:text-white">
+<nav class="fixed top-0 w-full z-50 bg-surface/70 backdrop-blur-xl border-b border-outline-variant/30 shadow-sm">
+<div class="flex justify-between items-center px-gutter py-4 max-w-container-max mx-auto">
+<a class="flex items-center" href="index.html">
+<img alt="Vecar Autos" class="h-12 w-auto brightness-110 filter drop-shadow-[0_0_10px_rgba(255,255,255,0.1)]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCsYREqbbdWNwU1FSPBgO5h7Euf6U2hzf5bK87FeA-FtlRpboKz3WKs2r4jZGweiFTipw8CQB7hAqJ20IWG0r3IzDHqQ8JE9u0MNCZIelZQXRz0PP4sttmtnS6HOUroFsT144isVDA4oa447YiAGjHDtzbZ036JE8d4gPnLccJ-U7ftS1DM3VxFMozarjTyhiS4CAghc02JD7MexHEbCvfovgS7qR8rFPHpF3Nr6k806eHmJKJlNCV1_WniD_8MrRZCasiVXCQgt07s"/>
+</a>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-electric-blue font-bold border-b-2 border-electric-blue pb-1 font-body-md text-body-md" href="index.html">Catalogo VERCAR-AUTO</VERCAR-AUTO></a>
+</div>
+<div class="flex items-center gap-4">
+<a class="bg-primary-container text-on-primary-container px-6 py-2 rounded-full font-bold transition-transform scale-95 active:scale-90 hover:opacity-80" href="https://wa.me/573112568613" target="_blank">WhatsApp</a>
+</div>
+</div>
+</nav>
+
+<main class="pt-24 pb-section-padding px-gutter max-w-container-max mx-auto">
+<header class="mb-12">
+<h1 class="font-headline-xl text-headline-xl mb-4">Inventario Exclusivo</h1>
+<p class="text-on-surface-variant max-w-2xl font-body-md">Descubra nuestra selección curada de vehículos. Nuestra colección representa la cúspide de la ingeniería automotriz. COMPRAS - VENTAS - RETOMAS - CONSIGNACIONES
+
+FINANCIACIÓN HASTA EL 100%</p>
+</header>
+
+<div class="flex flex-col lg:flex-row gap-card-gap">
+<aside class="w-full lg:w-72 shrink-0">
+<div class="glass p-6 rounded-xl sticky top-28" id="filter-form">
+<div class="flex items-center justify-between mb-6">
+<h2 class="font-label-caps text-label-caps uppercase text-titanium-silver tracking-widest">Filtros</h2>
+<button class="text-xs text-electric-blue font-bold" id="limpiar-filtros">Limpiar</button>
+</div>
+<div class="space-y-8">
+<div>
+<label class="block text-xs font-bold mb-3 uppercase tracking-tighter text-on-surface-variant">Marca</label>
+<select class="w-full bg-surface-container-high border-none text-on-surface rounded-lg py-3 px-4 focus:ring-1 focus:ring-electric-blue font-body-sm appearance-none cursor-pointer" id="filter-marca">
+<option value="todas">Todas las Marcas</option>
+</select>
+</div>
+<div>
+<label class="block text-xs font-bold mb-3 uppercase tracking-tighter text-on-surface-variant">Transmisión</label>
+<div class="space-y-2">
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="rounded border-outline-variant bg-surface-container-high text-electric-blue focus:ring-0" type="checkbox" id="filter-at"/>
+<span class="font-body-sm group-hover:text-electric-blue transition-colors">Automática</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="rounded border-outline-variant bg-surface-container-high text-electric-blue focus:ring-0" type="checkbox" id="filter-mc"/>
+<span class="font-body-sm group-hover:text-electric-blue transition-colors">Mecánica</span>
+</label>
+</div>
+</div>
+<div>
+<label class="block text-xs font-bold mb-3 uppercase tracking-tighter text-on-surface-variant">Precio Mínimo</label>
+<input class="w-full bg-surface-container-high border-none text-on-surface rounded-lg py-3 px-4 focus:ring-1 focus:ring-electric-blue font-body-sm" placeholder="Ej: 50000000" type="number" id="filter-precio-min"/>
+</div>
+<div>
+<label class="block text-xs font-bold mb-3 uppercase tracking-tighter text-on-surface-variant">Precio Máximo</label>
+<input class="w-full bg-surface-container-high border-none text-on-surface rounded-lg py-3 px-4 focus:ring-1 focus:ring-electric-blue font-body-sm" placeholder="Ej: 300000000" type="number" id="filter-precio-max"/>
+</div>
+</div>
+<button class="w-full mt-8 py-3 bg-white/5 border border-white/10 hover:bg-white/10 text-on-surface rounded-lg font-bold transition-all text-sm" id="aplicar-filtros">Aplicar Filtros</button>
+</div>
+</aside>
+
+<div class="flex-1">
+<div class="flex justify-between items-center mb-8">
+<p class="font-body-sm text-on-surface-variant">Mostrando <span class="text-on-surface font-bold" id="result-count">0</span> resultados</p>
+<div class="flex items-center gap-2">
+<span class="font-body-sm text-on-surface-variant">Ordenar por:</span>
+<select class="bg-transparent border-none text-on-surface font-bold focus:ring-0 cursor-pointer" id="sort-by">
+<option value="">Más Recientes</option>
+<option value="precio-desc">Precio: Mayor a Menor</option>
+<option value="precio-asc">Precio: Menor a Mayor</option>
+<option value="anio-desc">Año: Más Reciente</option>
+</select>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-card-gap" id="vehicle-grid"></div>
+</div>
+</div>
+</main>
+
+<footer class="bg-charcoal-deep w-full relative">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-card-gap px-gutter py-section-padding max-w-container-max mx-auto border-t border-outline-variant/20">
+<div>
+<a class="inline-block mb-6" href="index.html"><img alt="Vecar Autos" class="h-16 w-auto brightness-110 filter" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCsYREqbbdWNwU1FSPBgO5h7Euf6U2hzf5bK87FeA-FtlRpboKz3WKs2r4jZGweiFTipw8CQB7hAqJ20IWG0r3IzDHqQ8JE9u0MNCZIelZQXRz0PP4sttmtnS6HOUroFsT144isVDA4oa447YiAGjHDtzbZ036JE8d4gPnLccJ-U7ftS1DM3VxFMozarjTyhiS4CAghc02JD7MexHEbCvfovgS7qR8rFPHpF3Nr6k806eHmJKJlNCV1_WniD_8MrRZCasiVXCQgt07s"/></a>
+<p class="font-body-sm text-on-secondary-container mb-6 max-w-xs">Ofreciendo excelencia automotriz y un servicio personalizado para los entusiastas más exigentes.</p>
+<p class="font-body-sm text-titanium-silver font-label-caps text-label-caps">&copy; 2026 Vecar Autos. COMPRAS - VENTAS - RETOMAS - CONSIGNACIONES - FINANCIACIÓN .</p>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="flex flex-col gap-3">
+<a class="text-on-secondary-container hover:text-electric-blue transition-colors font-label-caps text-label-caps uppercase text-[10px] tracking-widest" href="https://www.google.com/maps/place/VECAR+AUTOS/@4.7160569,-74.0603031,17z/data=!3m1!4b1!4m6!3m5!1s0x8e3f850019984661:0xfcc6402251d45e86!8m2!3d4.7160569!4d-74.0603031!16s%2Fg%2F11xt5y7v85?entry=ttu&g_ep=EgoyMDI2MDUyMC
+<a class="text-on-secondary-container hover:text-electric-blue transition-colors font-label-caps text-label-caps uppercase text-[10px] tracking-widest" href="https://share.google/FzwUwzqOEBt7GHOeb" target="_blank">Buscanos</a>4wIKXMDSoASAFQAw%3D%3D" target="_blank">Ubicación</a>
+</div>
+<div class="flex flex-col gap-3">
+<a class="text-on-secondary-container hover:text-electric-blue transition-colors font-label-caps text-label-caps uppercase text-[10px] tracking-widest" href="https://www.instagram.com/vecarautos?igsh=MWU5dHRibXNja3hxZQ%3D%3D&utm_source=qr">Instagram</a>
+<a class="text-on-secondary-container hover:text-electric-blue transition-colors font-label-caps text-label-caps uppercase text-[10px] tracking-widest" href="https://www.tiktok.com/@vecar.autos">TikTok</a>
+<a class="text-on-secondary-container hover:text-electric-blue transition-colors font-label-caps text-label-caps uppercase text-[10px] tracking-widest" href="https://www.facebook.com/p/VECAR-AUTOS-100064921606152/">Facebook</a>
+</div>
+</div>
+<div>
+<h5 class="text-on-surface font-bold mb-4 font-body-md">Newsletter</h5>
+<form class="flex gap-2">
+<input class="flex-1 bg-surface-container-high border-none rounded-lg py-2 px-4 text-on-surface font-body-sm focus:ring-1 focus:ring-electric-blue" placeholder="Email" type="email"/>
+<button class="bg-electric-blue text-white px-4 py-2 rounded-lg font-bold text-sm">Unirse</button>
+</form>
+</div>
+</div>
+</footer>
+
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+<script src="app/main.js"></script>
+</body>
+</html>

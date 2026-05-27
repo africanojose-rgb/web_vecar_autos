@@ -1,0 +1,84 @@
+body {
+  background-color: #0A0A0A;
+  color: #e5e2e1;
+}
+
+.glass {
+  background: rgba(10, 10, 10, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(42, 42, 42, 0.5);
+}
+
+.glass-panel {
+  background: rgba(10, 10, 10, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(42, 42, 42, 0.5);
+}
+
+.machined-edge {
+  border: 1px solid #2A2A2A;
+}
+
+.hero-gradient {
+  background: linear-gradient(to bottom, rgba(10, 10, 10, 0) 0%, rgba(10, 10, 10, 1) 100%);
+}
+
+.glow-hover:hover {
+  box-shadow: 0 0 20px rgba(0, 102, 255, 0.3);
+}
+
+.transition-glow {
+  transition: all 0.3s ease;
+}
+
+.transition-glow:hover {
+  box-shadow: 0 0 15px rgba(0, 102, 255, 0.4);
+}
+
+.primary-glow:hover {
+  box-shadow: 0 0 20px rgba(0, 102, 255, 0.4);
+}
+
+.card-inner-shadow {
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #0A0A0A;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #424656;
+  border-radius: 10px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease forwards;
+}
+
+.animate-fade-in-delay-1 {
+  animation: fadeIn 0.5s ease 0.1s forwards;
+  opacity: 0;
+}
+
+.animate-fade-in-delay-2 {
+  animation: fadeIn 0.5s ease 0.2s forwards;
+  opacity: 0;
+}
+
+.animate-fade-in-delay-3 {
+  animation: fadeIn 0.5s ease 0.3s forwards;
+  opacity: 0;
+}

@@ -1,0 +1,13 @@
+# Vecar Autos - Catálogo Web
+# Requisitos para ejecución local
+
+python>=3.6
+# No se requieren librerías Python adicionales.
+# El servidor se ejecuta con:
+#   python3 -m http.server 8080
+#
+# Dependencias externas (vía CDN en el HTML):
+# - Tailwind CSS (https://cdn.tailwindcss.com)
+# - Firebase SDK (https://www.gstatic.com/firebasejs/)
+# - Google Fonts (Sora, Hanken Grotesk)
+# - Material Symbols (Google Icons)
