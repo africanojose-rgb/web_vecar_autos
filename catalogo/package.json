@@ -1,0 +1,11 @@
+{
+  "name": "vecar-catalogo",
+  "private": true,
+  "scripts": {
+    "build:css": "npx tailwindcss -i ./styles/input.css -o ./styles/output.css --minify",
+    "watch:css": "npx tailwindcss -i ./styles/input.css -o ./styles/output.css --watch"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.0"
+  }
+}
