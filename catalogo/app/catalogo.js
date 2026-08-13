@@ -1,11 +1,11 @@
 function crearCardHTML(vehiculo) {
   var data = vehiculo;
-  var id = vehiculo.id;
-  var foto = obtenerPrimeraFoto(data.fotos);
+  var id = escapeHtml(vehiculo.id);
+  var foto = escapeHtml(obtenerPrimeraFoto(data.fotos));
   var badge = "";
   if (data.estado) {
     var badgeClases = "bg-electric-blue text-white";
-    var badgeTexto = data.estado;
+    var badgeTexto = escapeHtml(data.estado);
     if (data.estado === "DISPONIBLE" || data.estado === "VIRTUAL") {
       badgeClases = "bg-electric-blue text-white";
       badgeTexto = "Disponible";
@@ -21,17 +21,18 @@ function crearCardHTML(vehiculo) {
     }
     badge = '<span class="' + badgeClases + ' text-[10px] font-bold uppercase px-3 py-1 rounded-full tracking-widest">' + badgeTexto + "</span>";
   }
-  var transmisionTexto = data.transmision === "AT" ? "Automática" : data.transmision === "MC" ? "Mecánica" : data.transmision || "";
+  var transmisionTexto = data.transmision === "AT" ? "Automática" : data.transmision === "MC" ? "Mecánica" : escapeHtml(data.transmision || "");
+  var marcaLinea = escapeHtml(data.marca) + " " + escapeHtml(data.linea);
   return (
     '<div class="group bg-charcoal-deep rounded-xl overflow-hidden border border-outline-variant/30 hover:border-electric-blue/50 transition-all duration-500 flex flex-col animate-fade-in">' +
       '<div class="relative aspect-[16/10] overflow-hidden">' +
-        '<img alt="' + data.marca + " " + data.linea + '" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="' + foto + '" loading="lazy" onerror="this.onerror=null;this.src=\'https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=800&q=80\'"/>' +
+        '<img alt="' + marcaLinea + '" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="' + foto + '" loading="lazy" onerror="this.onerror=null;this.src=\'https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=800&q=80\'"/>' +
         '<div class="absolute top-4 left-4">' + badge + "</div>" +
       "</div>" +
       '<div class="p-6 flex flex-col flex-1">' +
         '<div class="mb-4">' +
-          '<h3 class="font-headline-lg text-[22px] leading-tight mb-1">' + data.marca + " " + data.linea + " " + (data.version || "") + "</h3>" +
-          '<p class="text-titanium-silver text-sm uppercase tracking-widest font-label-caps">' + data.anio + " &bull; " + (data.kilometraje ? data.kilometraje.toLocaleString("es-CO") + " km" : "") + "</p>" +
+          '<h3 class="font-headline-lg text-[22px] leading-tight mb-1">' + marcaLinea + " " + escapeHtml(data.version || "") + "</h3>" +
+          '<p class="text-titanium-silver text-sm uppercase tracking-widest font-label-caps">' + escapeHtml(data.anio) + " &bull; " + (data.kilometraje ? data.kilometraje.toLocaleString("es-CO") + " km" : "") + "</p>" +
         "</div>" +
         '<div class="grid grid-cols-2 gap-y-3 mb-6 font-body-sm text-on-surface-variant">' +
           '<div class="flex items-center gap-2">' +
@@ -40,7 +41,7 @@ function crearCardHTML(vehiculo) {
           "</div>" +
           '<div class="flex items-center gap-2">' +
             '<span class="material-symbols-outlined text-base">palette</span>' +
-            "<span>" + (data.color || "") + "</span>" +
+            "<span>" + escapeHtml(data.color || "") + "</span>" +
           "</div>" +
         "</div>" +
         '<div class="mt-auto pt-6 border-t border-outline-variant/20 flex items-center justify-between">' +
@@ -99,7 +100,7 @@ function cargarVehiculos() {
       '<div class="col-span-full text-center py-20"><div class="inline-block w-8 h-8 border-2 border-electric-blue border-t-transparent rounded-full animate-spin"></div><p class="text-on-surface-variant font-body-sm mt-4">Cargando vehículos...</p></div>';
   }
   supabase.from("vehiculos")
-    .select("*")
+    .select("id, marca, linea, version, anio, cilindraje, color, transmision, kilometraje, precio_venta, estado, descripcion, fotos, created_at")
     .order("created_at", { ascending: false })
     .then(function (result) {
       if (result.error) {
