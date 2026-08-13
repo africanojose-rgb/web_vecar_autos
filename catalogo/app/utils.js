@@ -1,3 +1,9 @@
+const WHATSAPP_NUMBER = '573112568613';
+
+function whatsappUrl(mensaje) {
+  return 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(mensaje);
+}
+
 function formatearCOP(numero) {
   if (numero == null || isNaN(numero)) return "$0";
   return "$" + Math.round(numero).toLocaleString("es-CO");

@@ -12,24 +12,39 @@ function cargarDetalle() {
     detalleContent.innerHTML =
       '<div class="text-center py-20"><span class="material-symbols-outlined text-6xl text-error block mb-4">error</span><p class="text-on-surface-variant mb-4">La carga está tomando más de lo esperado.</p><button class="bg-electric-blue text-white px-6 py-2 rounded-lg font-bold text-sm cursor-pointer" onclick="cargarDetalle()">Reintentar</button></div>';
   }, 15000);
-  db.collection("vehiculos").doc(id).get().then(function (doc) {
-    clearTimeout(timeout);
-    if (!doc.exists) {
+  supabase.from("vehiculos")
+    .select("*")
+    .eq("id", id)
+    .single()
+    .then(function (result) {
+      clearTimeout(timeout);
+      if (result.error) {
+        if (result.error.code === "PGRST116") {
+var mensajeWhatsApp = "Hola, estoy interesado en el vehículo " + (data.marca || "") + " " + (data.linea || "") + (data.version ? " " + data.version : "") + " (" + (data.anio || "") + ") por valor de $" + (data.precio_venta != null ? data.precio_venta.toLocaleString("es-CO") : "") + ". ¿Está disponible?";
+  var waUrl = whatsappUrl(mensajeWhatsApp);
+  document.getElementById("detalle-content").innerHTML =
+            '<div class="text-center py-20"><span class="material-symbols-outlined text-6xl text-error block mb-4">search_off</span><p class="text-on-surface-variant">Vehículo no encontrado.</p><a class="text-electric-blue mt-4 inline-block" href="index.html">Volver al catálogo</a></div>';
+          return;
+        }
+        throw result.error;
+      }
+      if (!result.data) {
+        document.getElementById("detalle-content").innerHTML =
+          '<div class="text-center py-20"><span class="material-symbols-outlined text-6xl text-error block mb-4">search_off</span><p class="text-on-surface-variant">Vehículo no encontrado.</p><a class="text-electric-blue mt-4 inline-block" href="index.html">Volver al catálogo</a></div>';
+        return;
+      }
+      renderizarDetalle(result.data);
+    })
+    .catch(function (error) {
+      clearTimeout(timeout);
+      console.error("Error al cargar detalle:", error);
       document.getElementById("detalle-content").innerHTML =
-        '<div class="text-center py-20"><span class="material-symbols-outlined text-6xl text-error block mb-4">search_off</span><p class="text-on-surface-variant">Vehículo no encontrado.</p><a class="text-electric-blue mt-4 inline-block" href="index.html">Volver al catálogo</a></div>';
-      return;
-    }
-    renderizarDetalle(doc);
-  }).catch(function (error) {
-    clearTimeout(timeout);
-    console.error("Error al cargar detalle:", error);
-    document.getElementById("detalle-content").innerHTML =
-      '<div class="text-center py-20"><span class="material-symbols-outlined text-6xl text-error block mb-4">error</span><p class="text-on-surface-variant">Error al cargar el vehículo.</p><a class="text-electric-blue mt-4 inline-block" href="index.html">Volver al catálogo</a></div>';
-  });
+        '<div class="text-center py-20"><span class="material-symbols-outlined text-6xl text-error block mb-4">error</span><p class="text-on-surface-variant">Error al cargar el vehículo.</p><a class="text-electric-blue mt-4 inline-block" href="index.html">Volver al catálogo</a></div>';
+    });
 }
 
-function renderizarDetalle(doc) {
-  var data = doc.data();
+function renderizarDetalle(vehiculo) {
+  var data = vehiculo;
   var fotos = data.fotos || [];
   var fotoPrincipal = fotos[0] || "https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=800&q=80";
   var transmisionTexto = data.transmision === "AT" ? "Automática" : data.transmision === "MC" ? "Mecánica" : data.transmision || "";
@@ -80,11 +95,11 @@ function renderizarDetalle(doc) {
             '<p class="text-titanium-silver font-body-md text-body-md">' + (data.anio || "") + (data.kilometraje ? " &bull; " + data.kilometraje.toLocaleString("es-CO") + " km" : "") + "</p>" +
           "</div>" +
           '<div class="flex items-baseline gap-2">' +
-            '<span class="text-electric-blue font-price-display text-price-display">' + formatearCOP(data.precioVenta) + "</span>" +
+            '<span class="text-electric-blue font-price-display text-price-display">' + formatearCOP(data.precio_venta) + "</span>" +
             '<span class="text-on-surface-variant font-body-sm text-body-sm"></span>' +
           "</div>" +
           '<div class="grid grid-cols-2 gap-4">' +
-            '<button class="w-full py-4 bg-primary-container text-on-primary-container rounded-lg font-bold flex items-center justify-center gap-2 transition-transform active:scale-95 glow-hover" onclick="window.open(\'https://wa.me/573112568613?text=Hola%2C%20me%20interesa%20' + encodeURIComponent(data.marca + " " + data.linea) + '\',\'_blank\')">' +
+            '<button class="w-full py-4 bg-primary-container text-on-primary-container rounded-lg font-bold flex items-center justify-center gap-2 transition-transform active:scale-95 glow-hover" onclick="window.open(\'' + waUrl + '\',\'_blank\')">' +
               '<span class="material-symbols-outlined">chat</span> WhatsApp' +
             "</button>" +
             '<button class="w-full py-4 border border-titanium-silver text-titanium-silver rounded-lg font-bold flex items-center justify-center gap-2 hover:bg-titanium-silver/10 transition-colors" onclick="navigator.clipboard.writeText(window.location.href)">' +

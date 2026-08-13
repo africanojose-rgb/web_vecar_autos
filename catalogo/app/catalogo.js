@@ -1,5 +1,5 @@
 function crearCardHTML(vehiculo) {
-  var data = vehiculo.data();
+  var data = vehiculo;
   var id = vehiculo.id;
   var foto = obtenerPrimeraFoto(data.fotos);
   var badge = "";
@@ -46,7 +46,7 @@ function crearCardHTML(vehiculo) {
         '<div class="mt-auto pt-6 border-t border-outline-variant/20 flex items-center justify-between">' +
           "<div>" +
             '<p class="text-[10px] uppercase font-bold text-on-surface-variant tracking-wider">Precio</p>' +
-            '<p class="font-price-display text-electric-blue">' + formatearCOP(data.precioVenta) + "</p>" +
+            '<p class="font-price-display text-electric-blue">' + formatearCOP(data.precio_venta) + "</p>" +
           "</div>" +
           '<button class="bg-white/10 hover:bg-electric-blue text-white px-6 py-2 rounded-lg font-bold transition-all text-sm transition-glow ver-detalles-btn" data-id="' + id + '">Ver detalles</button>' +
         "</div>" +
@@ -98,16 +98,20 @@ function cargarVehiculos() {
     grid.innerHTML =
       '<div class="col-span-full text-center py-20"><div class="inline-block w-8 h-8 border-2 border-electric-blue border-t-transparent rounded-full animate-spin"></div><p class="text-on-surface-variant font-body-sm mt-4">Cargando vehículos...</p></div>';
   }
-  db.collection("vehiculos")
-    .where("visibleWeb", "==", true)
-    .orderBy("createdAt", "desc")
-    .onSnapshot({ includeMetadataChanges: false }, function (snapshot) {
-      var docs = snapshot.docs;
-      window.todosLosVehiculos = docs;
+  supabase.from("vehiculos")
+    .select("*")
+    .order("created_at", { ascending: false })
+    .then(function (result) {
+      if (result.error) {
+        throw result.error;
+      }
+      var rows = result.data || [];
+      window.todosLosVehiculos = rows;
       visibleCount = PAGE_SIZE;
-      poblarMarcas(docs);
-      renderizarCatalogo(docs);
-    }, function (error) {
+      poblarMarcas(rows);
+      renderizarCatalogo(rows);
+    })
+    .catch(function (error) {
       console.error("Error al cargar vehículos:", error);
       if (grid) {
         grid.innerHTML =
@@ -127,7 +131,7 @@ function filtrarVehiculos() {
   var filtrados = docs.slice();
   if (marca && marca.value && marca.value !== "todas") {
     filtrados = filtrados.filter(function (v) {
-      return v.data().marca && v.data().marca.toLowerCase() === marca.value.toLowerCase();
+      return v.marca && v.marca.toLowerCase() === marca.value.toLowerCase();
     });
   }
   var transmisionesActivas = [];
@@ -135,29 +139,29 @@ function filtrarVehiculos() {
   if (transmisionMC && transmisionMC.checked) transmisionesActivas.push("MC");
   if (transmisionesActivas.length > 0) {
     filtrados = filtrados.filter(function (v) {
-      return transmisionesActivas.indexOf(v.data().transmision) !== -1;
+      return transmisionesActivas.indexOf(v.transmision) !== -1;
     });
   }
   if (precioMin && precioMin.value) {
     var pMin = parseFloat(precioMin.value);
     if (!isNaN(pMin)) {
-      filtrados = filtrados.filter(function (v) { return v.data().precioVenta >= pMin; });
+      filtrados = filtrados.filter(function (v) { return v.precio_venta >= pMin; });
     }
   }
   if (precioMax && precioMax.value) {
     var pMax = parseFloat(precioMax.value);
     if (!isNaN(pMax)) {
-      filtrados = filtrados.filter(function (v) { return v.data().precioVenta <= pMax; });
+      filtrados = filtrados.filter(function (v) { return v.precio_venta <= pMax; });
     }
   }
   visibleCount = PAGE_SIZE;
   if (sortBy && sortBy.value) {
     if (sortBy.value === "precio-desc") {
-      filtrados.sort(function (a, b) { return b.data().precioVenta - a.data().precioVenta; });
+      filtrados.sort(function (a, b) { return b.precio_venta - a.precio_venta; });
     } else if (sortBy.value === "precio-asc") {
-      filtrados.sort(function (a, b) { return a.data().precioVenta - b.data().precioVenta; });
+      filtrados.sort(function (a, b) { return a.precio_venta - b.precio_venta; });
     } else if (sortBy.value === "anio-desc") {
-      filtrados.sort(function (a, b) { return (b.data().anio || 0) - (a.data().anio || 0); });
+      filtrados.sort(function (a, b) { return (b.anio || 0) - (a.anio || 0); });
     }
   }
   renderizarCatalogo(filtrados);
@@ -184,7 +188,7 @@ function poblarMarcas(docs) {
   select.innerHTML = '<option value="todas">Todas las Marcas</option>';
   var marcas = {};
   docs.forEach(function (v) {
-    var m = v.data().marca;
+    var m = v.marca;
     if (m) marcas[m] = true;
   });
   var marcasArray = Object.keys(marcas).sort();
